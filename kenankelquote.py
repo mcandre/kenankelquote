@@ -12,7 +12,7 @@ import sys
 import getopt
 
 LOGGER = logging.getLogger("File")
-FILE_HANDLER = logging.FileHandler("KenanKelQuote.log")
+FILE_HANDLER = logging.FileHandler("kenankelquote.log")
 FORMATTER = logging.Formatter("%(asctime)s %(levelname)s %(message)r")
 FILE_HANDLER.setFormatter(FORMATTER)
 LOGGER.addHandler(FILE_HANDLER)

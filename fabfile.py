@@ -1,7 +1,7 @@
 from fabric.api import local
 
 def test():
-  local("python KenanKelQuote.py")
+  local("python kenankelquote.py")
 
 def guard():
   local("bundle exec guard")
