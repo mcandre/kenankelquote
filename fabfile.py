@@ -8,3 +8,6 @@ def guard():
 
 def lint():
   local("pylint *.py; true")
+
+def clean():
+  local("rm -rf *.pyc; true")
