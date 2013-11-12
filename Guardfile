@@ -1,33 +1,19 @@
 guard :shell do
   watch('Gemfile') do |m|
-    title = 'Bundler output'
-    msg = 'Bundler Failure'
-    status = :failed
-
-    if `bundle`
-      msg = 'Bundled'
-      status = :status
-    end
+    title = 'Bundler'
+    msg = `bundle`
+    status = ($?.success? && :success) || :failed
 
     n msg, title, status
-
-      "-> #{msg}"
+    "-> #{msg}"
   end
 
   watch(/(.+)\.py/) do |m|
-    title = 'Test output'
-    msg = 'Python error'
-    status = :failed
-
-    output = `python #{m[1]}.py`
-
-    if $?.success?
-      msg = output
-      status = :success
-    end
+    title = 'Test'
+    msg = `python #{m[1]}.py`
+    status = ($?.success? && :success) || :failed
 
     n msg, title, status
-
     "-> #{msg}"
   end
 end
