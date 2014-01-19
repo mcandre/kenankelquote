@@ -1,10 +1,9 @@
 guard :shell do
-  watch(/(.+)\.py/) do |m|
+  watch(/.+\.py/) do |m|
     title = 'Test'
-    msg = `python #{m[1]}.py`
+    eager "python #{m[1]}.py"
     status = ($?.success? && :success) || :failed
-
-    n msg, title, status
-    "-> #{msg}"
+    n '', title, status
+    ''
   end
 end
