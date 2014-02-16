@@ -1,5 +1,10 @@
 # KenanKelQuote - Awww, here it goes!
 
+# EXAMPLE
+
+    $ fab test
+    Grab a springboard, an owl, and a lampshade, and meet me on AIM!
+
 # REQUIREMENTS
 
 * [Python](http://python.org)
@@ -22,8 +27,3 @@ Test your code while you tweak it:
 Keep the code tidy:
 
     $ fab lint
-
-# EXAMPLE
-
-    $ fab test
-    Grab a springboard, an owl, and a lampshade, and meet me on AIM!
