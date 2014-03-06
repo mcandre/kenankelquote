@@ -16,7 +16,7 @@
 
 # DEVELOPMENT
 
-## Guard
+## Local CI
 
 Test your code while you tweak it:
 
@@ -27,3 +27,8 @@ Test your code while you tweak it:
 Keep the code tidy:
 
     $ fab lint
+
+## Spell Check
+
+    $ aspelllint
+    ...
