@@ -1,6 +1,6 @@
 from invoke import run, task
 
-@task
+@task(default = True)
 def test():
   run("python kenankelquote.py")
 

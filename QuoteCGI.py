@@ -2,13 +2,14 @@
 
 import KenanKelQuote
 
-KenanKelQuote.load_quotes()
+KENAN_KEL_QUOTE = KenanKelQuote.KenanKelQuote()
+KENAN_KEL_QUOTE.load_quotes()
 
 import cgi
 
 FORM = cgi.FieldStorage()
 
-QUOTE = KenanKelQuote.get_quote()
+QUOTE = KENAN_KEL_QUOTE.get_quote()
 
 print("Content-type: text/html\n\n")
 

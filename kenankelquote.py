@@ -11,87 +11,86 @@ import random
 import sys
 import getopt
 
-LOGGER = logging.getLogger("File")
-FILE_HANDLER = logging.FileHandler("kenankelquote.log")
-FORMATTER = logging.Formatter("%(asctime)s %(levelname)s %(message)r")
-FILE_HANDLER.setFormatter(FORMATTER)
-LOGGER.addHandler(FILE_HANDLER)
-LOGGER.setLevel(logging.INFO)
+class KenanKelQuote:
+  def __init__(self):
+    self.logger = logging.getLogger("File")
+    self.file_handler = logging.FileHandler("kenankelquote.log")
 
-OBJECTS = []
-PLACES = []
+    self.file_handler.setFormatter(
+      logging.Formatter("%(asctime)s %(levelname)s %(message)r")
+    )
 
-def load_lines(filename):
-  """Load funny lines from a text file into a list."""
+    self.logger.addHandler(self.file_handler)
+    self.logger.setLevel(logging.INFO)
 
-  LOGGER.debug("Opening %s" % (filename))
+    self.objects = []
+    self.places = []
 
-  f = open(filename, "r")
+  def load_lines(self, filename):
+    """Load funny lines from a text file into a list."""
 
-  LOGGER.debug("Opened %s in read text mode" % (filename))
-  LOGGER.debug("Reading lines")
+    self.logger.debug("Opening %s" % (filename))
 
-  lines = ("".join(f.readlines())).split("\n")
+    f = open(filename, "r")
 
-  LOGGER.debug("Read lines")
-  LOGGER.debug("Closing %s" % (filename))
+    self.logger.debug("Opened %s in read text mode" % (filename))
+    self.logger.debug("Reading lines")
 
-  f.close()
+    lines = ("".join(f.readlines())).split("\n")
 
-  LOGGER.debug("Closed %s" % (filename))
+    self.logger.debug("Read lines")
+    self.logger.debug("Closing %s" % (filename))
 
-  return lines
+    f.close()
 
-def load_quotes(objectfile = "objects.txt", placefile = "places.txt"):
-  """Load funny items from text files."""
+    self.logger.debug("Closed %s" % (filename))
 
-  global OBJECTS
-  global PLACES
+    return lines
 
-  try:
-    LOGGER.debug("Loading object lines")
+  def load_quotes(self, objectfile = "objects.txt", placefile = "places.txt"):
+    """Load funny items from text files."""
 
-    OBJECTS = load_lines(objectfile)
+    self.logger.debug("Loading object lines")
 
-    LOGGER.debug("Loaded object lines %s" % (OBJECTS))
-    LOGGER.debug("Loading place lines")
+    self.objects = self.load_lines(objectfile)
 
-    PLACES = load_lines(placefile)
+    self.logger.debug("Loaded object lines %s" % (self.objects))
+    self.logger.debug("Loading place lines")
 
-    LOGGER.debug("Loaded place lines %s" % (PLACES))
-  except:
-    LOGGER.error("Error loading files")
+    self.places = self.load_lines(placefile)
 
-    raise Exception("Error loading files")
+    self.logger.debug("Loaded place lines %s" % (self.places))
 
-  if len(OBJECTS) < 1 or len(PLACES) < 1:
-    LOGGER.warn("Objects or places empty: %s %s" % (OBJECTS, PLACES))
+    self.logger.error("Error loading files")
 
-def get_quote():
-  """Generate random quote"""
+    if len(self.objects) < 1 or len(self.places) < 1:
+      self.logger.warn("Objects or places empty: %s %s" % (self.objects, self.places))
 
-  LOGGER.debug("Getting random objects")
+  def get_quote(self):
+    """Generate random quote"""
 
-  o = [random.choice(OBJECTS) for i in range(3)]
+    self.logger.debug("Getting random objects")
 
-  LOGGER.debug("Got random objects: %s" % (o))
-  LOGGER.debug("Getting random place")
+    o = [random.choice(self.objects) for i in range(3)]
 
-  place = random.choice(PLACES)
+    self.logger.debug("Got random objects: %s" % (o))
+    self.logger.debug("Getting random place")
 
-  LOGGER.debug("Got random place %s" % (place))
-  LOGGER.debug("Concatenating quote")
+    place = random.choice(self.places)
 
-  quote = "Grab %s, %s, and %s, and meet me %s!" % (
-    o[0].strip(),
-    o[1].strip(),
-    o[2].strip(),
-    place.strip()
-  )
+    self.logger.debug("Got random place %s" % (place))
+    self.logger.debug("Concatenating quote")
 
-  LOGGER.info("Concatenated quote: %s" % (quote))
+    quote = "Grab %s, %s, and %s, and meet me %s!" % (
+      o[0].strip(),
+      o[1].strip(),
+      o[2].strip(),
+      place.strip()
+    )
 
-  return quote
+    self.logger.info("Concatenated quote: %s" % (quote))
+
+    return quote
 
 def usage():
   """Print usage message"""
@@ -131,11 +130,11 @@ def main():
   if len(args) == 2:
     objectfile, placefile = args[0], args[1]
 
-  LOGGER.setLevel(loglevel)
+  kenan_kel_quote = KenanKelQuote()
+  kenan_kel_quote.logger.setLevel(loglevel)
+  kenan_kel_quote.load_quotes(objectfile, placefile)
 
-  load_quotes(objectfile, placefile)
-
-  quote = get_quote()
+  quote = kenan_kel_quote.get_quote()
 
   print(quote)
 
