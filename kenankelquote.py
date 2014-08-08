@@ -96,9 +96,9 @@ def get_quote():
 def usage():
   """Print usage message"""
 
-  print "Usage: [options] %s <objectfile> <placefile>" % (sys.argv[0])
-  print "--loglevel <level>"
-  print "-h --help (usage)"
+  print("Usage: [options] %s <objectfile> <placefile>" % (sys.argv[0]))
+  print("--loglevel <level>")
+  print("-h --help (usage)")
 
   sys.exit()
 
@@ -129,7 +129,7 @@ def main():
         raise Exception("Loglevel is an integer from 0 to 50")
 
   if len(args) == 2:
-    objectfile, placefile = args
+    objectfile, placefile = args[0], args[1]
 
   LOGGER.setLevel(loglevel)
 
@@ -137,10 +137,10 @@ def main():
 
   quote = get_quote()
 
-  print quote
+  print(quote)
 
 if __name__ == "__main__":
   try:
     main()
-  except KeyboardInterrupt, e:
+  except KeyboardInterrupt as e:
     pass
