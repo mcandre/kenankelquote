@@ -16,7 +16,16 @@ def pylint():
 def pyflakes():
   run("pyflakes .")
 
-@task("pep8", "pylint", "pyflakes")
+@task
+def lili():
+  run("bundle exec lili .")
+
+@task(
+  "pep8",
+  "pylint",
+  "pyflakes",
+  "lili"
+)
 def lint():
   pass
 
