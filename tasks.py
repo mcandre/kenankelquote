@@ -20,11 +20,12 @@ def pyflakes():
 def lili():
   run("bundle exec lili .")
 
-@task(
-  "pep8",
-  "pylint",
-  "pyflakes",
-  "lili"
+@task(pre = [
+  pep8,
+  pylint,
+  pyflakes,
+  lili
+  ]
 )
 def lint():
   pass
